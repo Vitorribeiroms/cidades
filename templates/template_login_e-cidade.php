@@ -29,7 +29,7 @@ use ECidade\V3\Extension\Registry;
 
 $clientId = Registry::get('app.config')->get('api.client.id');
 $clientSecret = Registry::get('app.config')->get('api.client.secret');
-
+// $lMostraLinkPrimeiroAcesso = false;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -37,6 +37,8 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
     <title>e-Cidade</title>
     <meta charset="iso-8859-1">
     <meta http-equiv="Expires" CONTENT="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 
     <link href="imagens/ecidade/favicon.png" rel="icon"  type="image/png" />
     <link href="estilos/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css"/>
@@ -49,12 +51,24 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
     <script language="JavaScript" type="text/javascript" src="scripts/jquery-ui-1.10.4.custom.min.js"></script>
   </head>
 
-  <body class="<?php echo $sClassAtiva;?>">
+  <body class="bg-psp">
+    <div class="box-aviso-psp">
+      <img src="imagens/ecidade/login/logos-ecidade-dbseller.png" alt="">
+
+      <div class="box-msg">
+        <div class="txt">
+          <h2 class="title">Como utilizar a versão demo?</h2>
+          <p>Esta é a versão demonstração do e-Cidade. você vai ter acesso as principais funcionalidades do sistema, descobrindo como se comporta o nosso sistema. Faça o login com os dados enviados para você via e-mail, qualquer dúvida entre em contato com os canais de suporte do e-Cidade.</p>
+        </div>
+      </div>
+      <footer class="aviso-footer">
+        <h2 class="title">e-Cidade: Tecnologia unida a gestão inteligente</h2>
+        <p>Tecnologia de ponta e funcionalidades completas.</p>
+      </footer>
+    </div><!-- .box-aviso-psp -->
 
     <div class="container">
-
       <a href="http://www.softwarepublico.gov.br/ver-comunidade?community_id=15315976" title="Entre na comunidade e-Cidade no Portal do Software PÃºblico." target="_blank"><img class="logo-ecidade" src="imagens/ecidade/login/logotipo_ecidade.png"/></a>
-
       <form method="post" name="form1">
 
         <div class="access-fields">
@@ -109,7 +123,7 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
         </div>
 
         <div class="link-acesso">
-          <?php echo($lMostraLinkPrimeiroAcesso ? '<a href="primeiroAcesso.php">Primeiro acesso</a>' : ''); ?>
+          <?php echo($lMostraLinkPrimeiroAcesso ? '<a href="https://google.com" target="_blank">Primeiro acesso</a>' : ''); ?>
         </div>
 
         <span id="testaLogin"></span>
@@ -123,7 +137,6 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
         </div>
 
       </form>
-
     </div>
   </body>
   <script src="scripts/classes/http/http.js"></script>
