@@ -359,16 +359,22 @@ body.bg-psp {
 .box-aviso-psp {
   position: fixed;
   z-index: 100;
-  top: 60px;
+  padding: 60px 0;
   left: 80px;
   max-width: 600px;
   width: 100%;
   color: #fff;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+  flex-direction: column;
+
 }
 
 .box-aviso-psp  img {
   display: block;
-  margin-bottom: 130px
+  max-width: 359px;
+  width: 100%;
 }
 
 .box-aviso-psp .box-msg {
@@ -379,7 +385,7 @@ body.bg-psp {
   border-radius: 8px;
   overflow: hidden;
   padding: 10px 24px;
-  margin: 0 auto 150px;
+  margin: 0 auto ;
 }
 
 .box-aviso-psp .box-msg .txt {
@@ -411,7 +417,7 @@ body.bg-psp {
   line-height: 18px;
 }
 
-@media(max-width: 600px) {
+@media(max-width: 700px) {
   * {
     box-sizing: border-box;
   }

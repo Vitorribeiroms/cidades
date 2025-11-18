@@ -57,12 +57,12 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
 
       <div class="box-msg">
         <div class="txt">
-          <h2 class="title">Como utilizar a versï¿½o demo?</h2>
-          <p>Esta ï¿½ a versï¿½o demonstraï¿½ï¿½o do e-Cidade. vocï¿½ vai ter acesso as principais funcionalidades do sistema, descobrindo como se comporta o nosso sistema. Faï¿½a o login com os dados enviados para vocï¿½ via e-mail, qualquer dï¿½vida entre em contato com os canais de suporte do e-Cidade.</p>
+          <h2 class="title">Como utilizar a versão demo?</h2>
+          <p>Esta é a versão demonstração do e-Cidade. você vai ter acesso as principais funcionalidades do sistema, descobrindo como se comporta o nosso sistema. Faça o login com os dados enviados para você via e-mail, qualquer dúvida entre em contato com os canais de suporte do e-Cidade.</p>
         </div>
       </div>
       <footer class="aviso-footer">
-        <h2 class="title">e-Cidade: Tecnologia unida a gestï¿½o inteligente</h2>
+        <h2 class="title">e-Cidade: Tecnologia unida a gestão inteligente</h2>
         <p>Tecnologia de ponta e funcionalidades completas.</p>
       </footer>
     </div><!-- .box-aviso-psp -->
