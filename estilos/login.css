@@ -384,7 +384,7 @@ body.bg-psp {
   width: 100%;
   border-radius: 8px;
   overflow: hidden;
-  padding: 10px 24px;
+  padding: 10px 24px 20px;
   margin: 0 auto ;
 }
 
@@ -402,6 +402,27 @@ body.bg-psp {
 .box-aviso-psp .box-msg p {
   font-size: 12px;
   line-height: 18px;
+}
+
+.box-aviso-psp .box-msg .link {
+  display: inline-block;
+	font-size: 12px;
+	background-color: #FFFFFF;
+	color: #003685;
+	padding: 0 25px;
+	border-radius: 8px;
+	font-weight: 700;
+	height: 40px;
+	line-height: 40px;
+	text-decoration: none;
+}
+.box-aviso-psp .box-msg .link span {
+  background: url(../imagens/ecidade/login/seta-right.png) no-repeat right top;
+	padding-right: 20px;
+}
+
+.box-aviso-psp .box-msg .link:hover {
+  text-decoration: underline;
 }
 
 .box-aviso-psp .aviso-footer {

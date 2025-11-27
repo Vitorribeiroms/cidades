@@ -58,12 +58,13 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
       <div class="box-msg">
         <div class="txt">
           <h2 class="title">Como utilizar a versão demo?</h2>
-          <p>Esta é a versão demonstração do e-Cidade. você vai ter acesso as principais funcionalidades do sistema, descobrindo como se comporta o nosso sistema. Faça o login com os dados enviados para você via e-mail, qualquer dúvida entre em contato com os canais de suporte do e-Cidade.</p>
+          <p>Esta é a versão demonstração do e-Cidade. você vai ter acesso as principais funcionalidades do sistema, descobrindo como se comporta o nosso sistema. Clique no botão de cadastro, preencha seus dados e faça o login com os dados enviados para você via e-mail.</p>
+          <a href="https://cadastro.psp.dbseller.com.br/" target="_blank" class="link"><span>Cadastre-se</span></a>
         </div>
       </div>
       <footer class="aviso-footer">
-        <h2 class="title">e-Cidade: Tecnologia unida a gestão inteligente</h2>
-        <p>Tecnologia de ponta e funcionalidades completas.</p>
+        <h2 class="title">e-Cidade: O melhor software público para uma gestão municipal eficiente</h2>
+        <!-- <p>Tecnologia de ponta e funcionalidades completas.</p> -->
       </footer>
     </div><!-- .box-aviso-psp -->
 
