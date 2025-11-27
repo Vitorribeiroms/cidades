@@ -118,7 +118,7 @@ body.bg-psp {
   width: 33%;
   text-align: right;
   padding-right: 1%;
-  horizontal-align: right;
+  text-align: right;
 }
 
 .access-fields input:not([type="button"]), .access-fields select {
@@ -447,7 +447,33 @@ body.bg-psp {
     padding: 20px 0 0;
   }
   .box-aviso-psp {
-    display: none;
+    position: static;
+    z-index: 100;
+    padding: 0px 20px;
+    width: 100%;
+    color: #fff;
+    display: block;
+  }
+  .box-aviso-psp img{
+    display: block;
+    margin: 0 auto 30px;
+  }
+  .box-aviso-psp .box-msg {
+    margin-bottom: 30px;
+  }
+  .box-aviso-psp .box-msg p {
+    font-size: 14px;
+  }
+  .box-aviso-psp .box-msg .link {
+    font-size: 16px;
+  }
+  .box-aviso-psp .aviso-footer {
+    margin-bottom: 30px;
+    padding-top: 20px;
+  }
+  .box-aviso-psp .aviso-footer .title {
+    font-size: 20px;
+    text-align: center;
   }
   .container {
     width: auto;
