@@ -73,6 +73,7 @@
             "app/Helpers/Drive.php",
             "app/Helpers/Orcamento/FiltrosOrcamento.php",
             "app/Helpers/Orcamento/FuncoesOrcamento.php",
+            "app/Helpers/Configuracao/VerificaEstado.php",
             "app/Helpers/Planejamento/FiltrosDespesaPlanejamento.php",
             "app/Helpers/Contabilidade/FuncoesContabilidade.php"
         ],
