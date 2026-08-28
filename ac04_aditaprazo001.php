@@ -24,6 +24,7 @@
  *  Copia da licenca no diretorio licenca/licenca_en.txt
  *                                licenca/licenca_pt.txt
  */
+
 require_once modification("libs/db_stdlib.php");
 require_once modification("libs/db_conecta.php");
 require_once modification("libs/db_sessoes.php");
