@@ -1,4 +1,5 @@
 <?php
+
 /*
  *     E-cidade Software Publico para Gestao Municipal
  *  Copyright (C) 2009  DBSeller Servicos de Informatica
@@ -25,11 +26,6 @@
  *                                licenca/licenca_pt.txt
  */
 
-use ECidade\V3\Extension\Registry;
-
-$clientId = Registry::get('app.config')->get('api.client.id');
-$clientSecret = Registry::get('app.config')->get('api.client.secret');
-// $lMostraLinkPrimeiroAcesso = false;
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -37,8 +33,6 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
     <title>e-Cidade</title>
     <meta charset="iso-8859-1">
     <meta http-equiv="Expires" CONTENT="0">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
 
     <link href="imagens/ecidade/favicon.png" rel="icon"  type="image/png" />
     <link href="estilos/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet" type="text/css"/>
@@ -51,25 +45,12 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
     <script language="JavaScript" type="text/javascript" src="scripts/jquery-ui-1.10.4.custom.min.js"></script>
   </head>
 
-  <body class="bg-psp">
-    <div class="box-aviso-psp">
-      <img src="imagens/ecidade/login/logos-ecidade-dbseller.png" alt="">
-
-      <div class="box-msg">
-        <div class="txt">
-          <h2 class="title">Como utilizar a versão demo?</h2>
-          <p>Esta é a versão demonstração do e-Cidade. você vai ter acesso as principais funcionalidades do sistema, descobrindo como se comporta o nosso sistema. Clique no botão de cadastro, preencha seus dados e faça o login com os dados enviados para você via e-mail.</p>
-          <a href="https://cadastro.psp.dbseller.com.br/" target="_blank" class="link"><span>Cadastre-se</span></a>
-        </div>
-      </div>
-      <footer class="aviso-footer">
-        <h2 class="title">e-Cidade: O melhor software público para uma gestão municipal eficiente</h2>
-        <!-- <p>Tecnologia de ponta e funcionalidades completas.</p> -->
-      </footer>
-    </div><!-- .box-aviso-psp -->
+  <body class="<?php echo $sClassAtiva;?>">
 
     <div class="container">
+
       <a href="http://www.softwarepublico.gov.br/ver-comunidade?community_id=15315976" title="Entre na comunidade e-Cidade no Portal do Software PÃºblico." target="_blank"><img class="logo-ecidade" src="imagens/ecidade/login/logotipo_ecidade.png"/></a>
+
       <form method="post" name="form1">
 
         <div class="access-fields">
@@ -124,7 +105,7 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
         </div>
 
         <div class="link-acesso">
-          <?php echo($lMostraLinkPrimeiroAcesso ? '<a href="https://cadastro.psp.dbseller.com.br/" target="_blank">Primeiro acesso</a>' : ''); ?>
+          <?php echo($lMostraLinkPrimeiroAcesso ? '<a href="primeiroAcesso.php">Primeiro acesso</a>' : ''); ?>
         </div>
 
         <span id="testaLogin"></span>
@@ -133,11 +114,16 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
 
         <div class="social-midia">
           <p><a href="http://www.dbseller.com.br">www.dbseller.com.br</a><br/>Porto Alegre RS/Brasil</p>
-          <a href="http://twitter.com/#!/DBSeller" target="_blank" title="Siga-nos no Twitter" class="icon-twitter"><img src="imagens/ecidade/login/icon_twitter.png"></a>
-          <a href="http://www.facebook.com/pages/DBSeller-Sistemas-Integrados/168429383219644" target="_blank" title="ConheÃ§a nossa pÃ¡gina no Facebook"><img src="imagens/ecidade/login/icon_facebook.png"></a>
+          <a href="http://twitter.com/#!/DBSeller" target="_blank" title="Siga-nos no Twitter" class="icon-twitter">
+              <img src="imagens/ecidade/login/icon_twitter.png">
+          </a>
+          <a href="http://www.facebook.com/pages/DBSeller-Sistemas-Integrados/168429383219644" target="_blank" title="ConheÃ§a nossa pÃ¡gina no Facebook">
+              <img src="imagens/ecidade/login/icon_facebook.png">
+          </a>
         </div>
 
       </form>
+
     </div>
   </body>
   <script src="scripts/classes/http/http.js"></script>
@@ -194,7 +180,7 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
     }
   });
 
-  function js_acessar_dbportal() {
+  async function js_acessar_dbportal() {
 
       btnLogar.style.display = 'none';
       btnLoading.style.display = '';
@@ -203,69 +189,46 @@ $clientSecret = Registry::get('app.config')->get('api.client.secret');
       const senha = document.getElementById('usu_senha').value;
 
       const formData = new FormData();
+      formData.append('DB_HOST', $('#servidor').val() ?? '');
+      formData.append('DB_DATABASE', $('#base').val() ?? '');
+      formData.append('DB_PORT', $('#port').val() ?? '');
+      formData.append('DB_USERNAME', $('#user').val() ?? '');
+      formData.append('DB_PASSWORD', $('#senh').val() ?? '');
       formData.append('username', login);
       formData.append('password', senha ? senha : '');
-      formData.append('client_id', '<?php echo $clientId; ?>');
-      formData.append('client_secret', '<?php echo $clientSecret; ?>');
-      formData.append('grant_type', 'password');
 
-      generateDatabase().then(response => {
-        HttpClient.post('v4/oauth/token', {body: formData, reportProgress: false})
-          .then(response => {
-              localStorage.setItem('access_token', response.access_token);
+      if ($('#captcha')) {
+          formData.append('conteudoCaptcha', $('#ct_captcha').val());
+      }
+      const response = await HttpClient.post('v4/login', { body: formData, reportProgress: false });
+      btnLogar.style.display = '';
+      btnLoading.style.display = 'none';
 
-              $('#testaLogin').html('');
+      if (response.error) {
+          renderErro(response);
+          return;
+      }
 
-              const sSenha = calcMD5(senha);
-              const wname = `wname${Math.floor(Math.random() * 10000)}`;
+      localStorage.removeItem('ecidade@user_logout');
+      localStorage.setItem('ecidade@user_token', JSON.stringify({
+          access_token: response.data.access_token,
+          expires_at: Date.now() + response.data.expires_in * 1000,
+          refresh_token: response.data.refresh_token,
+      }));
 
-              var sQuery = '';
+      $('#testaLogin').html('');
+      $('#usu_senha').val('');
 
-              if ($('#servidor').length && $('#servidor').val() !== '') {
-                  sQuery += "&servidor=" + $('#servidor').val();
-                  sQuery += "&base=" + $('#base').val();
-                  sQuery += "&user=" + $('#user').val();
-                  sQuery += "&port=" + $('#port').val();
-                  sQuery += "&senha=" + $('#senh').val();
-              }
-
-              const oCaptcha = $('#captcha');
-              const sAuth = btoa(`DB_login=${login}&DB_senha=${sSenha}`).urlEncode();
-              const sUrl = 'abrir.php?sAuth=' + sAuth
-                  + ((oCaptcha) ? '&conteudoCaptcha=' + $('#ct_captcha').val() : '')
-                  + sQuery;
-
-              $('#usu_senha').val('');
-
-              window.open(sUrl, wname, `width=${screen.availWidth},height=${screen.availHeight}`);
-              btnLogar.style.display = '';
-              btnLoading.style.display = 'none';
-          })
-          .catch(response => {
-            alert("Houve um erro ao se autenticar.");
-              btnLogar.style.display = '';
-              btnLoading.style.display = 'none';
-          });
-      });
+      location.href = 'extension/desktop';
   }
 
-  // FunÃ§Ã£o criada para popular o database com a base selecionada no login
-  function generateDatabase(){
-    const formData = new FormData();
-    if ($('#servidor').length && $('#servidor').val() !== '') {
+  function renderErro(response) {
+      if (response.code === 'E_CAPTCHA') {
+          document.getElementById('captcha').classList.remove('container-captcha-hide');
+          reloadCaptcha();
+      }
 
-      formData.append('exec', 'setCookieDatabase');
-      formData.append('servidor', $('#servidor').val());
-      formData.append('base', $('#base').val());
-      formData.append('port', $('#port').val());
-
-      return HttpClient.post('login.rpc.php', {body: formData, reportProgress: false});
-    } else {
-
-      formData.append('exec', 'destroyCookieDatabase');
-
-      return HttpClient.post('login.rpc.php', {body: formData, reportProgress: false});
-    }
+      document.getElementById('testaLogin').innerHTML = response.message;
   }
 
   $(document).ready(function() {
